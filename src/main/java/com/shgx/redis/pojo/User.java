@@ -1,34 +1,32 @@
 package com.shgx.redis.pojo;
 
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
 
-@Component
-public class User {
-    private int id;
-    private String name;
-    private String password;
+public class User implements Serializable {
 
-    public int getId() {
-        return id;
+    private static final long serialVersionUID = -1L;
+
+    private String username;
+    private Integer age;
+
+    public User(String username, Integer age) {
+        this.username = username;
+        this.age = age;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getUsername() {
+        return username;
     }
 
-    public String getName() {
-        return name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Integer getAge() {
+        return age;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
