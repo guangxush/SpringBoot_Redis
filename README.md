@@ -107,7 +107,7 @@ public String testSessionTimeOut(Long id, HttpSession session, Model model){
 ```
 
 ### 测试结果
-- 控制台输出结果
+- 控制台输出结果<br>
 ![控制台输出结果](https://github.com/guangxush/SpringBoot_Redis/blob/master/image/result1.png)
-- redis后台查看结果
+- redis后台查看结果<br>
 ![Redis查看结果](https://github.com/guangxush/SpringBoot_Redis/blob/master/image/result2.png)
