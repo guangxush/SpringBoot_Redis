@@ -3,6 +3,16 @@ SpringBoot+Redis
 (使用Redis存储HttpSession)<br>
 [官方文档](https://docs.spring.io/spring-session/docs/current/reference/html5/guides/boot-redis.html#boot-sample)
 
+### 需求
+
+通常情况下，Tomcat、Jetty等Servlet容器，会默认将Session保存在内存中。如果是单个服务器实例的应用，将Session保存在服务器内存中是一个非常好的方案。但是这种方案有一个缺点，就是不利于扩展。
+
+目前越来越多的应用采用分布式部署，用于实现高可用性和负载均衡等。那么问题来了，如果将同一个应用部署在多个服务器上通过负载均衡对外提供访问，如何实现Session共享？
+
+实际上实现Session共享的方案很多，其中一种常用的就是使用Tomcat、Jetty等服务器提供的Session共享功能，将Session的内容统一存储在一个数据库（如MySQL）或缓存（如Redis）中。
+
+本文主要介绍另一种实现Session共享的方案，不依赖于Servlet容器，而是Web应用代码层面的实现，直接在已有项目基础上加入Spring Session框架来实现Session统一存储在Redis中。如果你的Web应用是基于Spring框架开发的，只需要对现有项目进行少量配置，即可将一个单机版的Web应用改为一个分布式应用，由于不基于Servlet容器，所以可以随意将项目移植到其他容器。
+
 ### 准备工作
 - 安装部署Redis, 请参考[链接](http://www.runoob.com/redis/redis-install.html)
 
