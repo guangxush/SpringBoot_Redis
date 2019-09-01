@@ -1,6 +1,8 @@
 ## 功能需求
 通常情况下，Tomcat的Servlet容器会默认将Session保存在内存中。如果是单个服务器实例的应用，将Session保存在服务器内存中是一个常用的选择，但是随着服务器数量的增多，这种方法变得不容易扩展。
-![session.png](https://upload-images.jianshu.io/upload_images/7632302-69152cfb9e3fd77e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![session.png](https://github.com/guangxush/iTechHeart/blob/master/image/Redis/redis1.png)
+
 比如上图中，User1通过负载均衡登录到Server1中，并把Session保存在了Server1中，但是此时User1进行操作2的时候访问到了Server2，但是Server2上面并没有保存User1的session，就会产生重新登录的问题。
 
 目前越来越多的应用采用分布式部署，用于实现高可用性和负载均衡等。那么问题来了，如果将同一个应用部署在多个服务器上通过负载均衡对外提供访问，如何实现Session共享？
@@ -8,7 +10,8 @@
 
 这里介绍另一种实现Session共享的方案，不依赖于Servlet容器，而是Web应用代码层面的实现，直接在已有项目基础上加入Spring Session框架来实现Session统一存储在Redis中。
 
-![spring-session.png](https://upload-images.jianshu.io/upload_images/7632302-5767ac955dcd2806.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![spring-session.png](https://github.com/guangxush/iTechHeart/blob/master/image/Redis/redis1.png)
+
 正如上图中，我们通过Spring Session将User1进行操作1时产生的Session保存在了Redis中，这样用户在访问Server2的时候就可以从Redis中读取User1 Session并验证，做到了多集群中的Session共享。
 
 如果你的Web应用是基于Spring框架开发的，只需要对现有项目进行少量配置，即可将一个单机版的Web应用改为一个分布式应用，由于不基于Servlet容器，所以可以随意将项目移植到其他容器。
@@ -143,10 +146,11 @@ public String testSessionTimeOut(Long id, HttpSession session, Model model){
 ## 最终效果
 - 浏览器中输入http://localhost/session/testSessionTimeOut(可在多台机器上部署测试，这里只测试Session是否保存在了Redis中)
 - 控制台输出结果
-![result1.png](https://upload-images.jianshu.io/upload_images/7632302-db2c0109d5a1ec5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![result1.png](https://github.com/guangxush/iTechHeart/blob/master/image/Redis/redis3.png)
 
 - redis后台查看结果
-![result2.png](https://upload-images.jianshu.io/upload_images/7632302-fdaf59fe9b86c3c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![result2.png](https://github.com/guangxush/iTechHeart/blob/master/image/Redis/redis4.png)
 
 ## 参考文档
 [Spring官方文档](https://docs.spring.io/spring-session/docs/current/reference/html5/guides/boot-redis.html#boot-sample)
