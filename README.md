@@ -150,6 +150,7 @@ public String testSessionTimeOut(Long id, HttpSession session, Model model){
 ![result1.png](https://github.com/guangxush/iTechHeart/blob/master/image/Redis/redis3.png)
 
 - redis后台查看结果
+
 ![result2.png](https://github.com/guangxush/iTechHeart/blob/master/image/Redis/redis4.png)
 
 ## 参考文档
